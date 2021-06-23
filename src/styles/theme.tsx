@@ -14,6 +14,7 @@ export const palette = {
   lightTextInputBackground: '#2A2A2A',
   darkTextInputBackground: '#2A2A2A',
   darkPlaceHolderTextInputBackground: '#828282',
+  lightPlaceHolderTextInputBackground: '#FAFBFC',
   lightGreen: '#01A56D',
   errorText: '#E53934',
 };
@@ -31,7 +32,7 @@ export const theme = createTheme({
     textInput: 14,
   },
   colors: {
-    textInputBackground: palette.lightTextInputBackground,
+    textInputBackground: palette.lightPlaceHolderTextInputBackground,
     mainBackground: palette.lightBackground,
     mainForeground: palette.black,
     errorText: palette.errorText,

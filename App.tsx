@@ -16,7 +16,7 @@ import {darkTheme} from './src/styles/darkTheme';
 import {ThemeProvider} from '@shopify/restyle';
 
 const App = () => {
-  const isDarkMode = true; // useColorScheme() === 'dark';
+  const isDarkMode = false; // useColorScheme() === 'dark';
   return (
     <>
       <ThemeProvider theme={isDarkMode ? darkTheme : theme}>
