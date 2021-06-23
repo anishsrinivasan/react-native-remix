@@ -15,14 +15,18 @@ import {theme} from './src/styles/theme';
 import {darkTheme} from './src/styles/darkTheme';
 import {ThemeProvider} from '@shopify/restyle';
 
+import {AuthProvider} from './src/context/Auth';
+
 const App = () => {
   const isDarkMode = true; // useColorScheme() === 'dark';
   return (
     <>
-      <ThemeProvider theme={isDarkMode ? darkTheme : theme}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Routes />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider theme={isDarkMode ? darkTheme : theme}>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <Routes />
+        </ThemeProvider>
+      </AuthProvider>
     </>
   );
 };

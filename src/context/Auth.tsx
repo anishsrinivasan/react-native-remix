@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState, useContext} from 'react';
-import * as AuthService from '../api/auth';
+import * as AuthService from '../API/auth';
 import {SignInProps, UserProps} from '../models/Auth';
 import {getToken, removeToken, setToken} from '../API';
 
@@ -7,6 +7,7 @@ interface AuthProviderData {
   children?: React.ReactNode;
 }
 
+type Theme = 'light' | 'dark';
 interface AuthContextData {
   signed: boolean;
   user: UserProps | null;
@@ -14,7 +15,7 @@ interface AuthContextData {
   signInWithPhoneNumber(signInData: SignInProps): Promise<void>;
   verifyOTP(otp_verify_code: string): Promise<void>;
   signOut(): void;
-  theme: string;
+  theme: Theme;
   setThemeMode(theme?: string | null): void;
 }
 
@@ -25,7 +26,7 @@ export const AuthProvider = ({
 }: AuthProviderData): React.ReactElement => {
   const [verification_id, setVerificationId] = useState<string>('');
   const [user, setUser] = useState<UserProps | null>(null);
-  const [theme, setTheme] = useState<string>('light');
+  const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
     async function loadStorageData() {
@@ -50,7 +51,6 @@ export const AuthProvider = ({
     return new Promise(async (resolve, reject) => {
       try {
         const response = await AuthService.signInWithPhoneNumber(signInData);
-        console.log(response);
         setVerificationId(response.verificationId);
         resolve();
       } catch (err) {
@@ -84,7 +84,7 @@ export const AuthProvider = ({
     setUser(null);
   }
 
-  function setThemeMode(selectedTheme: string | null) {
+  function setThemeMode(selectedTheme: Theme) {
     if (!selectedTheme) {
       const newTheme = theme === 'dark' ? 'light' : 'dark';
       setTheme(newTheme);
